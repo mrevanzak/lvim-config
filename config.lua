@@ -308,6 +308,13 @@ lvim.plugins = {
       vim.cmd('colorscheme dracula')
     end
   },
+
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require("lsp_signature").setup()
+    end,
+  }
 }
 
 lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
