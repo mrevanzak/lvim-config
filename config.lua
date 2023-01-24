@@ -314,6 +314,10 @@ lvim.plugins = {
     config = function()
       require("lsp_signature").setup()
     end,
+  },
+
+  {
+    "wakatime/vim-wakatime",
   }
 }
 
