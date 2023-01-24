@@ -20,9 +20,6 @@ lvim.transparent_window     = true
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["gd"] = ":lua require('goto-preview').goto_preview_definition()<cr>"
-lvim.keys.normal_mode["gr"] = ":lua require('goto-preview').goto_preview_references()<cr>"
-lvim.keys.normal_mode["gi"] = ":lua require('goto-preview').goto_preview_implementation()<cr>"
 
 -- New tab
 vim.keymap.set('n', 'te', ':tabedit<cr>')
@@ -35,10 +32,6 @@ vim.keymap.set('n', 'ss', ':split<Return><C-w>w')
 vim.keymap.set('n', 'sv', ':vsplit<Return><C-w>w')
 -- Move window
 lvim.builtin.which_key.mappings["<Space>"] = { "<C-w>w", "Switch Window" }
--- lvim.builtin.which_key.mappings["gd"] = "<cmd>lua require('goto-preview').goto_preview_definition()<cr>"
--- lvim.builtin.which_key.mappings["gr"] = "<cmd>lua require('goto-preview').goto_preview_references()<cr>"
--- lvim.builtin.which_key.mappings["gi"] = "<cmd>lua require('goto-preview').goto_preview_implementation()<cr>"
-
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
@@ -109,7 +102,11 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- generic LSP settings
 lvim.lsp.diagnostics.virtual_text = false
-
+lvim.lsp.buffer_mappings.normal_mode = {
+  ["gd"] = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", "Goto Preview Definition" },
+  ["gi"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", "Goto Preview Implementation" },
+  ["gr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>", "Goto Preview References" },
+}
 -- -- make sure server will always be installed even if the server is in skipped_servers list
 -- lvim.lsp.installer.setup.ensure_installed = {
 --     "sumneko_lua",
@@ -293,6 +290,11 @@ lvim.plugins = {
       require("lsp_lines").setup()
     end,
   }),
+
+  {
+    "ggandor/leap.nvim",
+    config = function() require("leap").set_default_keymaps() end
+  }
 }
 
 lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
