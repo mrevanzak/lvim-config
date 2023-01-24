@@ -188,13 +188,6 @@ formatters.setup {
 -- Additional Plugins
 lvim.plugins = {
   {
-    'ray-x/starry.nvim',
-    config = function()
-      require("starry").setup()
-    end,
-  },
-
-  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "VimEnter",
@@ -222,9 +215,6 @@ lvim.plugins = {
     config = function()
       require("nvim-ts-autotag").setup()
     end,
-  },
-
-  { "p00f/nvim-ts-rainbow",
   },
 
   {
@@ -300,6 +290,14 @@ lvim.plugins = {
   {
     "ggandor/leap.nvim",
     config = function() require("leap").set_default_keymaps() end
+  },
+
+  {
+    'Mofiqul/dracula.nvim',
+    config = function()
+      require('dracula').setup()
+      vim.cmd('colorscheme dracula')
+    end
   }
 }
 
