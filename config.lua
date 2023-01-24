@@ -105,6 +105,13 @@ lvim.builtin.treesitter.ensure_installed = {
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
+lvim.builtin.lualine.options.theme = "dracula"
+lvim.builtin.indentlines.options = {
+  space_char_blankline = " ",
+  show_current_context = true,
+  show_current_context_start = true,
+  show_trailling_blankline_indent = false,
+}
 
 -- generic LSP settings
 lvim.lsp.diagnostics.virtual_text = false
@@ -220,7 +227,9 @@ lvim.plugins = {
   {
     'rmagatti/goto-preview',
     config = function()
-      require('goto-preview').setup()
+      require('goto-preview').setup {
+        dismiss_on_move = true,
+      }
     end
   },
 
@@ -298,7 +307,7 @@ lvim.plugins = {
       require('dracula').setup()
       vim.cmd('colorscheme dracula')
     end
-  }
+  },
 }
 
 lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
