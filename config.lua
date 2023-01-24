@@ -24,6 +24,8 @@ vim.wo.rnu = true
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["f"] = "<Plug>(leap-forward)"
+lvim.keys.normal_mode["F"] = "<Plug>(leap-backward)"
 
 -- New tab
 vim.keymap.set('n', 'te', ':tabedit<cr>')
