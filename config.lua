@@ -13,6 +13,10 @@ lvim.log.level              = "warn"
 lvim.format_on_save.enabled = true
 lvim.colorscheme            = "dracula"
 lvim.transparent_window     = true
+
+-- set to relative line numbers
+vim.wo.rnu = true
+
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
