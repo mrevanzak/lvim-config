@@ -68,7 +68,9 @@ lvim.builtin.which_key.mappings["<Space>"] = { "<C-w>w", "Switch Window" }
 -- lvim.builtin.theme.options.style = "storm"
 
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["s"] = {
+  a = { "<cmd>Telescope live_grep<cr>", "Search Text within Project" },
+}
 -- lvim.builtin.which_key.mappings["t"] = {
 --   name = "+Trouble",
 --   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -297,7 +299,16 @@ lvim.plugins = {
 
   {
     "wakatime/vim-wakatime",
-  }
+  },
+
+  {
+    "Pocco81/auto-save.nvim",
+    config = function()
+      require("auto-save").setup {
+        trigger_events = { "InsertLeave" },
+      }
+    end,
+  },
 }
 
 lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
