@@ -341,11 +341,17 @@ require("presence"):setup({
   -- Example buf_name value: 64629:lazygit;#toggleterm#101
   reading_text        = function(buf_name)
     -- Extract the process name running in toggleterm from the given buffer name
-    local toggleterm_process = buf_name:match("%d+:(.+);#toggleterm#%d+")
+    local toggleterm_process = buf_name:match(".+:(.+);#toggleterm")
+
+    local zsh_process = buf_name:match("(.+);#toggleterm")
 
     -- Return custom text
     if toggleterm_process == "lazygit" then
       return "Commiting changes in lazygit"
+    end
+
+    if zsh_process == "zsh" then
+      return "Hacking in the terminal"
     end
 
     return string.format("Reading %s", buf_name)
