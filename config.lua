@@ -314,6 +314,10 @@ lvim.plugins = {
       }
     end,
   },
+
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+  },
 }
 
 lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
