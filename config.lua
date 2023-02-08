@@ -29,6 +29,7 @@ lvim.keys.normal_mode["F"] = "<Plug>(leap-backward)"
 
 -- New tab
 vim.keymap.set('n', 'te', ':tabedit<cr>')
+vim.keymap.set('n', 'tt', ':tabnew %<cr>')
 
 -- cycle to next tab
 lvim.builtin.which_key.mappings["`"] = { "<cmd>BufferLineCycleNext<CR>", "Next Buffer" }
@@ -68,9 +69,6 @@ lvim.builtin.which_key.mappings["<Space>"] = { "<C-w>w", "Switch Window" }
 -- lvim.builtin.theme.options.style = "storm"
 
 -- Use which-key to add extra bindings with the leader-key prefix
-lvim.builtin.which_key.mappings["sa"] =
-{ "<cmd>Telescope live_grep<cr>", "Search Text within Project" }
-
 -- lvim.builtin.which_key.mappings["t"] = {
 --   name = "+Trouble",
 --   r = { "<cmd>Trouble lsp_references<cr>", "References" },
