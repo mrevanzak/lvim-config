@@ -9,23 +9,23 @@ an executable
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- general
-lvim.log.level              = "warn"
-lvim.format_on_save.enabled = true
-lvim.colorscheme            = "dracula"
-lvim.transparent_window     = true
+lvim.log.level                 = "warn"
+lvim.format_on_save.enabled    = true
+lvim.colorscheme               = "dracula"
+lvim.transparent_window        = true
 
 -- set to relative line numbers
-vim.wo.rnu = true
+vim.wo.rnu                     = true
 
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
-lvim.leader = "space"
+lvim.leader                    = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["f"] = "<Plug>(leap-forward)"
-lvim.keys.normal_mode["F"] = "<Plug>(leap-backward)"
+lvim.keys.normal_mode["f"]     = "<Plug>(leap-forward)"
+lvim.keys.normal_mode["F"]     = "<Plug>(leap-backward)"
 
 -- New tab
 vim.keymap.set('n', 'te', ':tabedit<cr>')
@@ -168,6 +168,7 @@ formatters.setup {
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "graphql", "markdown", "yaml",
       "html", "css", "scss", "less", "vue", "svelte" } },
 
+  { command = "pint",        filetypes = { "php" } },
   -- {
   --   -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
   --   command = "prettier",
@@ -183,6 +184,7 @@ formatters.setup {
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { command = "eslint_d", filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" } },
+  { command = "phpstan",  filetypes = { "php" } },
   -- { command = "flake8", filetypes = { "python" } },
   -- {
   --   -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
@@ -200,7 +202,7 @@ linters.setup {
 
 local code_actions = require "lvim.lsp.null-ls.code_actions"
 code_actions.setup {
-   { command = "eslint_d", filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" } },
+  { command = "eslint_d", filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" } },
 }
 
 -- Additional Plugins
@@ -328,18 +330,17 @@ table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
 
 require("presence"):setup({
   -- General options
-  auto_update        = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
-  neovim_image_text  = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
-  main_image         = "file", -- Main image display (either "neovim" or "file")
-  client_id          = "793271441293967371", -- Use your own Discord application client id (not recommended)
-  log_level          = nil, -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
-  debounce_timeout   = 10, -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
-  enable_line_number = false, -- Displays the current line number instead of the current project
-  blacklist          = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
-  buttons            = true, -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
-  file_assets        = {}, -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
-  show_time          = true, -- Show the timer
-
+  auto_update         = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
+  neovim_image_text   = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
+  main_image          = "file", -- Main image display (either "neovim" or "file")
+  client_id           = "793271441293967371", -- Use your own Discord application client id (not recommended)
+  log_level           = nil, -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
+  debounce_timeout    = 10, -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
+  enable_line_number  = false, -- Displays the current line number instead of the current project
+  blacklist           = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
+  buttons             = true, -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
+  file_assets         = {}, -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
+  show_time           = true, -- Show the timer
   -- Rich Presence text options
   editing_text        = "Editing %s", -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
   file_explorer_text  = "Browsing %s", -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
