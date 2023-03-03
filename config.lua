@@ -31,8 +31,18 @@ lvim.keys.normal_mode["F"]     = "<Plug>(leap-backward)"
 vim.keymap.set('n', 'te', ':tabedit<cr>')
 vim.keymap.set('n', 'tt', ':tabnew %<cr>')
 
+-- Move line on visual mode
+vim.keymap.set('v', 'J', ":m '>+1<cr>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<cr>gv=gv")
+
+-- search all current word and replace
+lvim.keys.normal_mode["<leader>rr"] = ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>"
+
 -- cycle to next tab
 lvim.builtin.which_key.mappings["`"] = { "<cmd>BufferLineCycleNext<CR>", "Next Buffer" }
+
+-- cycle to previous tab
+lvim.builtin.which_key.mappings["1"] = { "<cmd>BufferLineCyclePrev<CR>", "Previous Buffer" }
 
 -- Split window
 vim.keymap.set('n', 'ss', ':split<Return><C-w>w')
