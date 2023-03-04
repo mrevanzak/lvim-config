@@ -24,8 +24,8 @@ vim.wo.rnu                     = true
 lvim.leader                    = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["f"]     = "<Plug>(leap-forward)"
-lvim.keys.normal_mode["F"]     = "<Plug>(leap-backward)"
+lvim.keys.normal_mode["s"]     = "<Plug>(leap-forward)"
+lvim.keys.normal_mode["S"]     = "<Plug>(leap-backward)"
 
 -- New tab
 vim.keymap.set('n', 'te', ':tabedit<cr>')
@@ -43,6 +43,8 @@ lvim.builtin.which_key.mappings["`"] = { "<cmd>BufferLineCycleNext<CR>", "Next B
 
 -- cycle to previous tab
 lvim.builtin.which_key.mappings["1"] = { "<cmd>BufferLineCyclePrev<CR>", "Previous Buffer" }
+
+lvim.builtin.which_key.mappings["ss"] = { require("telescope.builtin").current_buffer_fuzzy_find, "Search Buffer" }
 
 -- Split window
 vim.keymap.set('n', 'ss', ':split<Return><C-w>w')
@@ -79,15 +81,15 @@ lvim.builtin.which_key.mappings["<Space>"] = { "<C-w>w", "Switch Window" }
 -- lvim.builtin.theme.options.style = "storm"
 
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
