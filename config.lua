@@ -35,8 +35,8 @@ vim.keymap.set('n', 'tt', ':tabnew %<cr>')
 vim.keymap.set('v', 'J', ":m '>+1<cr>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<cr>gv=gv")
 
--- search all current word and replace
-lvim.keys.normal_mode["<leader>rr"] = ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>"
+lvim.builtin.which_key.mappings["r"] = { ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
+  "Search all current word and replace" }
 
 -- cycle to next tab
 lvim.builtin.which_key.mappings["`"] = { "<cmd>BufferLineCycleNext<CR>", "Next Buffer" }
@@ -45,6 +45,8 @@ lvim.builtin.which_key.mappings["`"] = { "<cmd>BufferLineCycleNext<CR>", "Next B
 lvim.builtin.which_key.mappings["1"] = { "<cmd>BufferLineCyclePrev<CR>", "Previous Buffer" }
 
 lvim.builtin.which_key.mappings["ss"] = { require("telescope.builtin").current_buffer_fuzzy_find, "Search Buffer" }
+
+lvim.builtin.which_key.mappings["p"] = { "\"_dP", "Ultimate paste" }
 
 -- Split window
 vim.keymap.set('n', 'ss', ':split<Return><C-w>w')
@@ -81,15 +83,15 @@ lvim.builtin.which_key.mappings["<Space>"] = { "<C-w>w", "Switch Window" }
 -- lvim.builtin.theme.options.style = "storm"
 
 -- Use which-key to add extra bindings with the leader-key prefix
-lvim.builtin.which_key.mappings["t"] = {
-  name = "+Trouble",
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-}
+-- lvim.builtin.which_key.mappings["t"] = {
+--   name = "+Trouble",
+--   r = { "<cmd>Trouble lsp_references<cr>", "References" },
+--   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+--   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+--   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+--   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+--   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+-- }
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
