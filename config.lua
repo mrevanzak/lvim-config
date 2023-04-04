@@ -130,11 +130,12 @@ lvim.builtin.indentlines.options = {
 
 -- generic LSP settings
 lvim.lsp.diagnostics.virtual_text = false
-lvim.lsp.buffer_mappings.normal_mode = {
-  ["gd"] = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", "Goto Preview Definition" },
-  ["gi"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", "Goto Preview Implementation" },
-  ["gr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>", "Goto Preview References" },
-}
+lvim.lsp.buffer_mappings.normal_mode["gd"] = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+  "Goto Preview Definition" }
+lvim.lsp.buffer_mappings.normal_mode["gi"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>",
+  "Goto Preview Implementation" }
+lvim.lsp.buffer_mappings.normal_mode["gr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>",
+  "Goto Preview References" }
 -- -- make sure server will always be installed even if the server is in skipped_servers list
 -- lvim.lsp.installer.setup.ensure_installed = {
 --     "sumneko_lua",
@@ -178,9 +179,12 @@ lvim.lsp.buffer_mappings.normal_mode = {
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "swiftformat", filetypes = { "swift" } },
-  { command = "prettierd",
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "graphql", "markdown", "yaml",
-      "html", "css", "scss", "less", "vue", "svelte" } },
+  {
+    command = "prettierd",
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "graphql", "markdown",
+      "yaml",
+      "html", "css", "scss", "less", "vue", "svelte" }
+  },
 
   { command = "pint",        filetypes = { "php" } },
   -- {
@@ -241,11 +245,13 @@ lvim.plugins = {
     end,
   },
 
-  { "zbirenbaum/copilot-cmp",
+  {
+    "zbirenbaum/copilot-cmp",
     after = { "copilot.lua", "nvim-cmp" },
   },
 
-  { "windwp/nvim-ts-autotag",
+  {
+    "windwp/nvim-ts-autotag",
     config = function()
       require("nvim-ts-autotag").setup()
     end,
@@ -344,22 +350,22 @@ table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
 
 require("presence"):setup({
   -- General options
-  auto_update         = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
+  auto_update         = true,                       -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
   neovim_image_text   = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
-  main_image          = "file", -- Main image display (either "neovim" or "file")
-  client_id           = "793271441293967371", -- Use your own Discord application client id (not recommended)
-  log_level           = nil, -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
-  debounce_timeout    = 10, -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
-  enable_line_number  = false, -- Displays the current line number instead of the current project
-  blacklist           = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
-  buttons             = true, -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
-  file_assets         = {}, -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
-  show_time           = true, -- Show the timer
+  main_image          = "file",                     -- Main image display (either "neovim" or "file")
+  client_id           = "793271441293967371",       -- Use your own Discord application client id (not recommended)
+  log_level           = nil,                        -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
+  debounce_timeout    = 10,                         -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
+  enable_line_number  = false,                      -- Displays the current line number instead of the current project
+  blacklist           = {},                         -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
+  buttons             = true,                       -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
+  file_assets         = {},                         -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
+  show_time           = true,                       -- Show the timer
   -- Rich Presence text options
-  editing_text        = "Editing %s", -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
-  file_explorer_text  = "Browsing %s", -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
-  git_commit_text     = "Committing changes", -- Format string rendered when committing changes in git (either string or function(filename: string): string)
-  plugin_manager_text = "Managing plugins", -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
+  editing_text        = "Editing %s",               -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
+  file_explorer_text  = "Browsing %s",              -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
+  git_commit_text     = "Committing changes",       -- Format string rendered when committing changes in git (either string or function(filename: string): string)
+  plugin_manager_text = "Managing plugins",         -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
   -- Example buf_name value: 64629:lazygit;#toggleterm#101
   reading_text        = function(buf_name)
     -- Extract the process name running in toggleterm from the given buffer name
@@ -378,7 +384,7 @@ require("presence"):setup({
 
     return string.format("Reading %s", buf_name)
   end,
-  workspace_text      = "Working on %s", -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
+  workspace_text      = "Working on %s",     -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
   line_number_text    = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
 })
 
