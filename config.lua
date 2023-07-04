@@ -189,7 +189,8 @@ formatters.setup {
   },
 
   { command = "pint",        filetypes = { "php" } },
-  { command = "black",       filetypes = { "phyton" } }
+  { command = "black",       filetypes = { "phyton" } },
+  { command = "rustfmt",     filetypes = { "rust" } },
   -- {
   --   -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
   --   command = "prettier",
