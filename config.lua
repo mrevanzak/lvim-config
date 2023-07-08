@@ -17,6 +17,9 @@ lvim.transparent_window        = true
 -- set to relative line numbers
 vim.wo.rnu                     = true
 
+-- set tab width
+vim.bo.shiftwidth              = 2
+
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
