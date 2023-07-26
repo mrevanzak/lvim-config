@@ -53,6 +53,7 @@ vim.keymap.set('n', 'tt', ':tabnew %<cr>')
 vim.keymap.set('v', 'J', ":m '>+1<cr>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<cr>gv=gv")
 
+lvim.builtin.gitsigns.opts.current_line_blame = true
 lvim.builtin.which_key.mappings["r"] = { ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
   "Search all current word and replace" }
 
