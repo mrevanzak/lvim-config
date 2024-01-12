@@ -1,18 +1,3 @@
--- PATCH: in order to address the message:
--- vim.treesitter.query.get_query() is deprecated, use vim.treesitter.query.get() instead. :help deprecated
---   This feature will be removed in Nvim version 0.10
-local orig_notify = vim.notify
-local filter_notify = function(text, level, opts)
-  -- more specific to this case
-  if type(text) == "string" and (string.find(text, "get_query", 1, true) or string.find(text, "get_node_text", 1, true)) then
-    -- for all deprecated and stack trace warnings
-    -- if type(text) == "string" and (string.find(text, ":help deprecated", 1, true) or string.find(text, "stack trace", 1, true)) then
-    return
-  end
-  orig_notify(text, level, opts)
-end
-vim.notify = filter_notify
-
 --[[
 lvim is the global options object
 
@@ -53,7 +38,10 @@ vim.keymap.set('n', 'tt', ':tabnew %<cr>')
 vim.keymap.set('v', 'J', ":m '>+1<cr>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<cr>gv=gv")
 
+lvim.builtin.telescope.active = true
+
 lvim.builtin.gitsigns.opts.current_line_blame = true
+
 lvim.builtin.which_key.mappings["r"] = { ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
   "Search all current word and replace" }
 
@@ -137,6 +125,22 @@ lvim.builtin.treesitter.ensure_installed = {
   "yaml",
 }
 
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.blade = {
+  install_info = {
+    url = "https://github.com/EmranMR/tree-sitter-blade",
+    files = { "src/parser.c" },
+    branch = "main",
+  },
+  filetype = "blade"
+}
+vim.filetype.add({
+  pattern = {
+    ['.*%.blade%.php'] = 'blade',
+  }
+})
+
+
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
 lvim.builtin.lualine.options.theme = "dracula"
@@ -148,7 +152,6 @@ lvim.builtin.indentlines.options = {
 }
 
 -- generic LSP settings
-lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.buffer_mappings.normal_mode["gd"] = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
   "Goto Preview Definition" }
 lvim.lsp.buffer_mappings.normal_mode["gi"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>",
@@ -295,7 +298,7 @@ lvim.plugins = {
   },
   {
     "akinsho/flutter-tools.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("flutter-tools").setup {
         widget_guides = {
@@ -304,30 +307,13 @@ lvim.plugins = {
       }
     end
   },
-  {
-    "turbio/bracey.vim",
-    cmd = { "Bracey", "BracyStop", "BraceyReload", "BraceyEval" },
-    run = "npm install --prefix server",
-  },
-  {
-    'xbase-lab/xbase',
-    run = 'make install', -- make free_space (not recommended, longer build time)
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "neovim/nvim-lspconfig"
-    },
-    config = function()
-      require 'xbase'.setup({}) -- see default configuration bellow
-    end
-  },
 
-  ({
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-    end,
-  }),
+  -- ({
+  --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  --   config = function()
+  --     require("lsp_lines").setup()
+  --   end,
+  -- }),
 
   {
     "ggandor/leap.nvim",
@@ -365,6 +351,20 @@ lvim.plugins = {
   {
     'nvim-treesitter/nvim-treesitter-context',
   },
+
+  {
+    "nvim-telescope/telescope-fzy-native.nvim",
+    build = "make",
+    event = "BufRead",
+  },
+
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require 'colorizer'.setup()
+    end
+  },
+
 }
 
 lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
