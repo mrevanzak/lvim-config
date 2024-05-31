@@ -27,8 +27,8 @@ vim.bo.shiftwidth              = 2
 lvim.leader                    = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["s"]     = "<Plug>(leap-forward)"
-lvim.keys.normal_mode["S"]     = "<Plug>(leap-backward)"
+lvim.keys.normal_mode["l"]     = "<Plug>(leap-forward)"
+lvim.keys.normal_mode["L"]     = "<Plug>(leap-backward)"
 
 -- New tab
 vim.keymap.set('n', 'te', ':tabedit<cr>')
